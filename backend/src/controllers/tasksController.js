@@ -6,6 +6,12 @@ const getAll = async (request, response) => {
     return response.status(200).json({tasks});
 };
 
+const getProducts = async (request, response) => {
+    const products = await tasksModel.getProducts();
+    return response.status(200).json({ products });
+  };
+
 module.exports =  {
-    getAll
+    getAll,
+    getProducts,
 };

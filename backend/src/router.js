@@ -7,6 +7,7 @@ const tasksMiddleware = require('./middlewares/tasksMiddleware')
 
 
 router.get('/tasks', tasksController.getAll);
+router.get('/products', tasksController.getProducts);
 
 
 
