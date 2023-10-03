@@ -1,0 +1,50 @@
+/* Define o estilo do corpo da página */
+body {
+    background-color: #ffffff; /* Fundo branco */
+    color: #000000; /* Texto preto */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    text-align: center; /* Centraliza o conteúdo na página */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+}
+
+/* Estiliza o cabeçalho (h1) */
+h1 {
+    color: #0000ff; /* Título em azul */
+    margin-top: 200px; /* Margem superior */
+}
+
+/* Estiliza o formulário */
+#loginForm {
+    margin-top: 20px; /* Margem superior */
+}
+
+/* Estiliza as etiquetas do formulário */
+label {
+    display: block; /* Coloca cada etiqueta em uma nova linha */
+    margin-bottom: 5px; /* Margem inferior */
+    color: #0000ff; /* Texto em azul */
+}
+
+/* Estiliza os campos de entrada de texto */
+input[type="text"] {
+    width: 35%;
+    padding: 10px;
+    margin-bottom: 1px;
+    border: 2px solid #0000ff; /* Borda azul */
+}
+
+/* Estiliza o botão de login */
+button[type="submit"] {
+    background-color: #0000ff; /* Fundo azul */
+    color: #ffffff; /* Texto branco */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estiliza a mensagem */
+#message {
+    margin-top: 20px; /* Margem superior */
+    color: #0000ff; /* Texto em azul */
+}
