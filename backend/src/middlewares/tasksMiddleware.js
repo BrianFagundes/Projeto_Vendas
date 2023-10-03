@@ -1,13 +1,13 @@
 const validateBody = (request, response, next) =>{
-    const {body} = request;
+    const {result} = request;
 
-    if(body.title == undefined){
-        return response.status(400).json({message: 'Erro, usuario não encontrado'})
+        if (result.recordset.length === 1) {
+        // Código de representante válido
+        res.status(200).json({ success: true, message: 'Login bem-sucedido' });
+    } else {
+        // Código de representante inválido
+        res.status(401).json({ success: false, message: 'Código de representante inválido' });
     }
-    if(body.title == ''){
-        return response.status(400).json({message: 'Erro, usuario não encontrado'})
-    }
-
     next();
 
 };

@@ -54,7 +54,28 @@ const getProducts = async () => {
   }
 };
 
+const verifyLogin = async (codrep) => {
+  try {
+    const pool = await sql.connect(connection.config);
+    
+    const request = pool.request();
+    request.input('codrep', sql.VarChar, codrep); // Declare o parâmetro 'codrep'
+
+    const result = await request.query(`
+      SELECT a.codrep, b.nomrep
+      FROM e090var a
+      INNER JOIN e090rep b ON a.codrep = b.codrep
+      WHERE a.codrep = @codrep
+    `);
+
+    return result.recordset.length === 1;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getAll,
   getProducts,
+  verifyLogin,
 };
