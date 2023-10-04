@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style copy.css">
+    <title>Consulta de Produtos</title>
+</head>
+<body>
+    <h1>Consulta de Produtos</h1>
+    <form id="productForm">
+        <label for="codpro">Código do Produto:</label>
+        <input type="text" id="codpro" name="codpro" required><br><br>
+
+        <label for="numsep">Número de Separação:</label>
+        <input type="text" id="numsep" name="numsep" required><br><br>
+
+        <button type="submit">Consultar</button><br><br>
+    </form>
+
+    <div id="result"></div>
+
+        <!-- Aqui está o código para exibir os detalhes do produto -->
+        <div class="container" style="display: none;">
+            <div class="product">
+
+                <div class="product-details">
+                    <h1 class="product-title" id="productName"></h1><br><br>
+                    <div class="product-image">
+                        <img src="" alt="Produto" id="productImage">
+                    </div>
+                    <br><br>
+                    <p class="product-description" id="productDescription"></p><br><br>
+                    <p class="product-price" id="productPrice"></p><br><br>
+                </div>
+            </div>
+        </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

@@ -74,8 +74,54 @@ const verifyLogin = async (codrep) => {
   }
 };
 
+const verifyProducts = async (codpro,numsep) => {
+  try {
+    const pool = await sql.connect(connection.config);
+
+    const request = pool.request();
+
+    request.input('codpro', sql.VarChar, codpro); // Declare o parâmetro 'codpro'
+    request.input('numsep', sql.VarChar, numsep); // Declare o parâmetro 'codpro'
+
+    const result = await request.query(`
+      SELECT DISTINCT
+        CONCAT(b.codpro,' - ',b.despro) as Produto,
+        b.usu_tspajb as Titulo,
+        b.usu_dapajb as Caracteristica,
+        CASE
+          WHEN b.usu_codseg='2' AND b.usu_moeven='AU' then REPLACE(ROUND(b.usu_preven*678,0),'.',',')
+          WHEN b.usu_codseg='1' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)+((b.usu_preven*678)/100*10)),0),'.',',')
+          WHEN b.usu_codseg='3' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)-((b.usu_preven*678)/100*10)),0),'.',',')
+          WHEN b.usu_codseg='4' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)-((b.usu_preven*678)/100*20)),0),'.',',')
+          WHEN b.usu_codseg='5' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)-((b.usu_preven*678)/100*30)),0),'.',',')
+          WHEN b.usu_codseg='2' AND b.usu_moeven<>'AU' then REPLACE(ROUND(b.usu_preven,0),'.',',')
+          WHEN b.usu_codseg='1' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)+((b.usu_preven)/100*10)),0),'.',',')
+          WHEN b.usu_codseg='3' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)-((b.usu_preven)/100*10)),0),'.',',')
+          WHEN b.usu_codseg='4' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)-((b.usu_preven)/100*20)),0),'.',',')
+          WHEN b.usu_codseg='5' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)-((b.usu_preven)/100*30)),0),'.',',')
+        END AS PRECO,
+        CONCAT('http://joias.synergie.com.br/uploads/produtos/',b.codref,'.jpg') as Foto
+      FROM e210dls a
+      INNER JOIN e075pro b ON a.codpro = b.codpro
+      WHERE a.codpro = @codpro OR a.numsep = @numsep
+    `);
+
+    if (result.recordset.length === 1) {
+      // Se houver um único registro, retorne os dados desse registro
+      return result.recordset[0];
+    } else {
+      // Se não houver resultados, retorne null
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAll,
   getProducts,
   verifyLogin,
+  verifyProducts,
 };

@@ -28,8 +28,25 @@ const getProducts = async (request, response) => {
     }
   };
 
+  const produto = async (req, response) => {
+    try {
+      const { codpro,numsep } = req.body;
+      const result = await tasksModel.verifyProducts(codpro,numsep);
+  
+      if (result) {
+        response.status(200).json({ success: true, message: 'Consulta bem-sucedida', data: result });
+      } else {
+        response.status(401).json({ success: false, message: 'Código de produto inválido' });
+      }
+    } catch (error) {
+      console.error(error);
+      response.status(500).json({ success: false, message: 'Erro no servidor' });
+    }
+  };
+
 module.exports =  {
     getAll,
     getProducts,
     login,
+    produto,
 };

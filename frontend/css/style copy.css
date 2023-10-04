@@ -1,0 +1,118 @@
+/* Define o estilo do corpo da página */
+body {
+    background-color: #ffffff; /* Fundo branco */
+    color: #000000; /* Texto preto */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+}
+
+/* Estiliza o cabeçalho (h1) */
+header h1 {
+    color: #0000ff; /* Título em azul */
+    margin: 20px auto; /* Centraliza na horizontal e define margem superior */
+    text-align: center; /* Centraliza o texto horizontalmente */
+}
+
+
+/* Estiliza o formulário e contêiner */
+.form-container {
+    text-align: center; /* Centraliza o conteúdo na página */
+    margin: 20px auto; /* Margem superior e inferior (centraliza na vertical) */
+    max-width: 400px;
+    width: 90%;
+    display: flex; /* Adiciona display flex para centralizar vertical e horizontalmente */
+    flex-direction: column; /* Coloca os elementos internos em uma coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    
+}
+
+/* Estiliza as etiquetas do formulário */
+label {
+    display: block; /* Coloca cada etiqueta em uma nova linha */
+    margin-bottom: 5px; /* Margem inferior */
+    color: #0000ff; /* Texto em azul */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
+}
+
+/* Estiliza os campos de entrada de texto */
+input[type="text"] {
+    width: 25%;
+    padding: 10px;
+    margin: 0 auto; /* Centraliza os elementos na horizontal */
+    border: 2px solid #0000ff; /* Borda azul */
+    display: block; /* Faz com que os elementos ocupem toda a largura disponível */
+}
+
+
+/* Estiliza o botão de consultar */
+button[type="submit"] {
+    background-color: #0000ff; /* Fundo azul */
+    color: #ffffff; /* Texto branco */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto; /* Centraliza o botão na horizontal */
+    display: block; /* Faz o botão ocupar toda a largura disponível */
+}
+
+/* Estiliza a mensagem de resultado */
+.result-container {
+    text-align: center;
+    display: none; /* Inicialmente invisível */
+    margin-top: 20px; /* Margem superior */
+}
+
+/* Estiliza o título dos detalhes do produto */
+.product-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff; /* Cor do título (azul) */
+    margin-bottom: 10px;
+    text-align: center; /* Centraliza o texto horizontalmente */
+    margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
+}
+
+/* Estiliza a imagem do produto */
+.product-image img {
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Estiliza a descrição do produto */
+.product-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #333; /* Cor da descrição (preto) */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
+}
+
+/* Estiliza o preço do produto */
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff; /* Cor do preço (azul) */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
+}
+/* Estiliza a classe container */
+.container {
+    text-align: center; /* Centraliza o conteúdo na página */
+    margin: 20px auto; /* Margem superior e inferior (centraliza na vertical) */
+    max-width: 400px;
+    width: 90%;
+    display: flex; /* Adiciona display flex para centralizar vertical e horizontalmente */
+    flex-direction: column; /* Coloca os elementos internos em uma coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+}

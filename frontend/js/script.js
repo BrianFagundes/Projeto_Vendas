@@ -32,3 +32,61 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('productForm');
+    const resultDiv = document.getElementById('result');
+    const productDiv = document.querySelector('.container'); // Seleciona a div dos detalhes do produto
+
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const codpro = document.getElementById('codpro').value;
+        const numsep = document.getElementById('numsep').value;
+
+        try {
+            const response = await fetch('http://localhost:3333/produto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ codpro, numsep }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    // Aqui você acessa os dados da consulta
+                    const dadosConsulta = data.data;
+
+                    // Preenche os elementos com os dados do produto
+                    document.getElementById('productImage').src = dadosConsulta.Foto;
+                    document.getElementById('productName').textContent = dadosConsulta.Produto;
+                    // Divide a descrição da característica em linhas separadas
+                    const caracteristica = dadosConsulta.Caracteristica.split('\n').map(line => line.trim()).join('<br>');
+
+                    const productDescription = document.getElementById('productDescription');
+                    productDescription.innerHTML = caracteristica;
+                    document.getElementById('productPrice').textContent = `R$ ${dadosConsulta.PRECO}`;
+
+                    // Torna os detalhes do produto visíveis
+                    productDiv.style.display = 'block';
+
+                    resultDiv.innerHTML = ''; // Limpa a mensagem de resultado anterior
+                } else {
+                    resultDiv.innerHTML = data.message; // Exibe a mensagem de erro
+                    productDiv.style.display = 'none'; // Oculta os detalhes do produto em caso de erro
+                }
+            } else {
+                resultDiv.innerHTML = 'Erro ao consultar o produto.';
+                productDiv.style.display = 'none'; // Oculta os detalhes do produto em caso de erro
+            }
+        } catch (error) {
+            console.error(error);
+            resultDiv.innerHTML = 'Erro ao consultar o produto.';
+            productDiv.style.display = 'none'; // Oculta os detalhes do produto em caso de erro
+        }
+    });
+});
+
+
