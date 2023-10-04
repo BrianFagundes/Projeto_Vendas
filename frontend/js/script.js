@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.success) {
                 // Login bem-sucedido, redirecionar o usuário para a segunda tela
-                window.location.href = '/segunda-tela.html'; // Substitua pelo URL da segunda tela
+                window.location.href = 'http://127.0.0.1:5500/frontend/produto.html'; // Substitua pelo URL da segunda tela
             } else {
                 // Login inválido, exibir uma mensagem de erro para o usuário
                 messageDiv.innerText = data.message;
@@ -62,12 +62,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Preenche os elementos com os dados do produto
                     document.getElementById('productImage').src = dadosConsulta.Foto;
                     document.getElementById('productName').textContent = dadosConsulta.Produto;
+
                     // Divide a descrição da característica em linhas separadas
                     const caracteristica = dadosConsulta.Caracteristica.split('\n').map(line => line.trim()).join('<br>');
-
                     const productDescription = document.getElementById('productDescription');
                     productDescription.innerHTML = caracteristica;
-                    document.getElementById('productPrice').textContent = `R$ ${dadosConsulta.PRECO}`;
+                    
+                    const preco = parseFloat(dadosConsulta.PRECO); // Converte a string para um número de ponto flutuante
+                    const precoFormatado = preco.toFixed(2); // Formata o número com duas casas decimais
+                    document.getElementById('productPrice').textContent = `R$ ${precoFormatado}`;
 
                     // Torna os detalhes do produto visíveis
                     productDiv.style.display = 'block';
