@@ -92,4 +92,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('productForm');
+    const resultDiv = document.getElementById('result');
+    const codproInput = document.getElementById('codpro'); // Seleciona a caixa de texto por ID
+    const numsepInput = document.getElementById('numsep'); // Seleciona a caixa de texto por ID
+    const consultButton = document.getElementById('consultButton'); // Seleciona o botão por ID
 
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const codpro = codproInput.value;
+        const numsep = numsepInput.value;
+
+        // ... (seu código de consulta aqui)
+
+        // Após a consulta, você pode limpar as caixas de texto assim:
+        codproInput.value = '';
+        numsepInput.value = '';
+    });
+});
