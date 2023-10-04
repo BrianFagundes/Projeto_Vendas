@@ -6,6 +6,13 @@ body {
     margin: 0; /* Remove margens padrão */
     padding: 0; /* Remove preenchimento padrão */
 }
+body h1 {
+    font-size:32px;
+    font-weight:bold;
+    margin:5px auto;
+    text-align: center; /* Centraliza o texto horizontalmente */
+
+}
 
 /* Estiliza o cabeçalho (h1) */
 header h1 {
