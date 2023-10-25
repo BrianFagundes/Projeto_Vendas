@@ -1,6 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
     const productData = JSON.parse(localStorage.getItem('productData'));
 
+    //Adicionar Carrinho
+    const adicionarCarrinhoButton = document.getElementById('adicionarCarrinhoButton');
+    adicionarCarrinhoButton.addEventListener('click', function () {
+        // Obter os dados do produto
+        const productData = JSON.parse(localStorage.getItem('productData'));
+
+        if (productData) {
+            // Adicionar o produto ao carrinho localmente (pode ser um array de objetos)
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            carrinho.push(productData);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+            // Exibir uma mensagem de confirmação
+            alert('Produto adicionado ao carrinho com sucesso!');
+        } else {
+            // Se não houver dados do produto em localStorage, exiba uma mensagem de erro
+            alert('Dados do produto não encontrados.');
+        }
+    });
+
+    // Ir para Carrinho
+
+    const irParaCarrinhoButton = document.getElementById('irParaCarrinhoButton');
+        irParaCarrinhoButton.addEventListener('click', function () {
+            // Redirecionar o usuário para a página do carrinho
+            window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
+    });
+
+
+
     if (productData) {
         // Preencha os elementos com os dados do produto
         document.getElementById('productImage').src = productData.Foto;
@@ -30,4 +60,5 @@ const voltarButton = document.getElementById('voltarButton');
 voltarButton.addEventListener('click', function () {
     // Volta para a página anterior
     window.history.back();
+
 });
