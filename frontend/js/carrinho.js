@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Recupere os produtos do carrinho do localStorage
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
+    let valorInicialCarrinho = calcularTotalCarrinho();
+
     function atualizarCarrinho() {
         // Limpe o carrinhoContainer antes de atualizar a exibição
         carrinhoContainer.innerHTML = '';
@@ -33,7 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Exiba o total
-            carrinhoContainer.innerHTML += `<p>Total: R$ ${total.toFixed(2)}</p>`;
+            carrinhoContainer.innerHTML += `<p>Total: R$ ${valorInicialCarrinho.toFixed(2)}</p>`;
+            carrinhoContainer.innerHTML += `<p>Total com desconto: R$ ${total.toFixed(2)}</p>`;
+            
         } else {
             // Caso o carrinho esteja vazio, exiba uma mensagem informando que o carrinho está vazio
             carrinhoContainer.innerHTML = '<p>O seu carrinho está vazio.</p>';
