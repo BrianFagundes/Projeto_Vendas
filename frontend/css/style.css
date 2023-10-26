@@ -11,12 +11,14 @@ body {
 /* Estiliza o cabeçalho (h1) */
 h1 {
     color: #000000; /* Título em azul */
-    margin-top: 200px; /* Margem superior */
+    margin-top: 200px; /* Reduza a margem superior para 20px */
 }
 
 /* Estiliza o formulário */
 #loginForm {
     margin-top: 20px; /* Margem superior */
+    max-width: 800px; /* Defina uma largura máxima para o formulário */
+    margin: 0 auto; /* Centralize o formulário na horizontal */
 }
 
 /* Estiliza as etiquetas do formulário */
@@ -25,8 +27,8 @@ label {
     margin-bottom: 5px; /* Margem inferior */
     color: #000000; /* Texto em azul */
     text-align: center; /* Centraliza o texto horizontalmente */
-    margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
-    font-size: 24px; /* Tamanho da fonte maior */
+    margin: 0 auto; /* Centralize o elemento na horizontal usando margens automáticas */
+    font-size: 20px; /* Tamanho da fonte menor para telas menores */
     font-weight: bold; /* Texto em negrito */
 }
 

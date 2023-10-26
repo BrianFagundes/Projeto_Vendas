@@ -6,12 +6,12 @@ body {
     margin: 0; /* Remove margens padrão */
     padding: 0; /* Remove preenchimento padrão */
 }
-body h1 {
-    font-size:32px;
-    font-weight:bold;
-    margin:5px auto;
-    text-align: center; /* Centraliza o texto horizontalmente */
 
+body h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 5px auto;
+    text-align: center; /* Centraliza o texto horizontalmente */
 }
 
 /* Estiliza o cabeçalho (h1) */
@@ -20,7 +20,6 @@ header h1 {
     margin: 20px auto; /* Centraliza na horizontal e define margem superior */
     text-align: center; /* Centraliza o texto horizontalmente */
 }
-
 
 /* Estiliza o formulário e contêiner */
 .form-container {
@@ -32,17 +31,16 @@ header h1 {
     flex-direction: column; /* Coloca os elementos internos em uma coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
-    
 }
 
 /* Estiliza as etiquetas do formulário */
 label {
     display: block; /* Coloca cada etiqueta em uma nova linha */
     margin-bottom: 5px; /* Margem inferior */
-    color: #404040; /* Texto em azul */
+    color: #000000; /* Texto em azul */
     text-align: center; /* Centraliza o texto horizontalmente */
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
-    font-size: 22px; /* Tamanho da fonte maior */
+    font-size: 22px; /* Tamanho da fonte menor para telas menores */
     font-weight: bold; /* Texto em negrito */
 }
 
@@ -51,14 +49,13 @@ input[type="text"] {
     width: 25%;
     padding: 10px;
     margin: 0 auto; /* Centraliza os elementos na horizontal */
-    border: 4px solid #000000; /* Borda azul */
+    border: 4px solid #565656; /* Borda azul */
     display: block; /* Faz com que os elementos ocupem toda a largura disponível */
 }
 
-
 /* Estiliza o botão de consultar */
 button[type="submit"] {
-    background-color: #000000; /* Fundo azul */
+    background-color: #565656; /* Fundo azul */
     color: #ffffff; /* Texto branco */
     padding: 10px 20px;
     border: none;
@@ -114,6 +111,7 @@ button[type="submit"] {
     text-align: center; /* Centraliza o texto horizontalmente */
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
 }
+
 /* Estiliza a classe container */
 .container {
     text-align: center; /* Centraliza o conteúdo na página */
@@ -124,4 +122,14 @@ button[type="submit"] {
     flex-direction: column; /* Coloca os elementos internos em uma coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
+}
+
+#irParaCarrinhoButton {
+    background-color: #0059ff; /* Fundo azul */
+    color: #ffffff; /* Texto branco */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto; /* Centraliza o botão na horizontal */
+    display: block; /* Faz o botão ocupar toda a largura disponível */
 }

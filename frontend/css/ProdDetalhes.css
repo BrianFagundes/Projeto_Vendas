@@ -5,22 +5,22 @@ body {
     font-family: Arial, sans-serif; /* Fonte padrão */
     margin: 0; /* Remove margens padrão */
     padding: 0; /* Remove preenchimento padrão */
+    text-align: center; /* Centraliza o conteúdo na página */
 }
-body h1 {
-    font-size:32px;
-    font-weight:bold;
-    margin:5px auto;
-    text-align: center; /* Centraliza o texto horizontalmente */
 
+body h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 5px auto;
+    text-align: center; /* Centraliza o texto horizontalmente */
 }
 
 /* Estiliza o cabeçalho (h1) */
 header h1 {
-    color: #0000ff; /* Título em azul */
+    color: #333; /* Título em azul */
     margin: 20px auto; /* Centraliza na horizontal e define margem superior */
     text-align: center; /* Centraliza o texto horizontalmente */
 }
-
 
 /* Estiliza o formulário e contêiner */
 .form-container {
@@ -32,7 +32,6 @@ header h1 {
     flex-direction: column; /* Coloca os elementos internos em uma coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
-    
 }
 
 /* Estiliza as etiquetas do formulário */
@@ -42,7 +41,7 @@ label {
     color: #404040; /* Texto em azul */
     text-align: center; /* Centraliza o texto horizontalmente */
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
-    font-size: 22px; /* Tamanho da fonte maior */
+    font-size: 22px; /* Tamanho da fonte menor para telas menores */
     font-weight: bold; /* Texto em negrito */
 }
 
@@ -54,7 +53,6 @@ input[type="text"] {
     border: 4px solid #000000; /* Borda azul */
     display: block; /* Faz com que os elementos ocupem toda a largura disponível */
 }
-
 
 /* Estiliza o botão de consultar */
 button[type="submit"] {
@@ -78,7 +76,7 @@ button[type="submit"] {
 .product-title {
     font-size: 24px;
     font-weight: bold;
-    color: #007bff; /* Cor do título (azul) */
+    color: #333; /* Cor do título (azul) */
     margin-bottom: 10px;
     text-align: center; /* Centraliza o texto horizontalmente */
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
@@ -114,6 +112,7 @@ button[type="submit"] {
     text-align: center; /* Centraliza o texto horizontalmente */
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
 }
+
 /* Estiliza a classe container */
 .container {
     text-align: center; /* Centraliza o conteúdo na página */
@@ -125,6 +124,7 @@ button[type="submit"] {
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
 }
+
 /* Estilos para centralizar o botão Voltar */
 #voltarButton {
     background-color: #565656; /* Fundo azul */
@@ -132,6 +132,35 @@ button[type="submit"] {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+    position: fixed; /* Torna o botão posicionado na tela */
+    bottom: 1em; /* Distância a partir do fundo */
+    right: 1em; /* Distância a partir da direita */
+    display: block; /* Faz o botão ocupar toda a largura disponível */
+}
+
+#adicionarCarrinhoButton {
+    background-color: #28a745; /* Fundo azul */
+    color: #ffffff; /* Texto branco */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
     margin: 0 auto; /* Centraliza o botão na horizontal */
     display: block; /* Faz o botão ocupar toda a largura disponível */
+}
+
+#container {
+    position: relative; /* Torna o elemento pai posicionado */
+}
+
+#irParaCarrinhoButton {
+    background-color: #0059ff;
+    color: #ffffff;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    display: block; /* Faz o botão ocupar toda a largura disponível */
+    position: absolute; /* Torna o botão posicionado em relação ao elemento pai */
+    left: 50%; /* Move o botão para o centro horizontal */
+    transform: translateX(-50%); /* Centraliza o botão horizontalmente */
+    top: 800px; /* Move o botão 10px para baixo em relação ao elemento pai */
 }

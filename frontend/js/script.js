@@ -38,6 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultDiv = document.getElementById('result');
     const productDiv = document.querySelector('.container'); // Seleciona a div dos detalhes do produto
 
+     // Ir para Carrinho
+
+     const irParaCarrinhoButton = document.getElementById('irParaCarrinhoButton');
+     irParaCarrinhoButton.addEventListener('click', function () {
+         // Redirecionar o usuário para a página do carrinho
+         window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
+ });
+
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
 
