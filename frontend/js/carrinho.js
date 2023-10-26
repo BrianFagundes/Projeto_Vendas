@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const carrinhoContainer = document.getElementById('carrinhoContainer');
     const botaoLimparCarrinho = document.getElementById('limpar-carrinho');
+    const botaoFinalizar = document.getElementById('finalizar');
     const botaoAplicarDesconto = document.getElementById('aplicar-desconto');
 
     // Recupere os produtos do carrinho do localStorage
@@ -110,6 +111,16 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
         atualizarCarrinho();
     }
+
+    // Botão finalizar 
+    botaoFinalizar.addEventListener('click', function () {
+        // Limpe o carrinho
+        carrinho = [];
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizarCarrinho();
+
+        window.location.href = 'http://127.0.0.1:5500/frontend/produto.html';
+    });
     
     
 
