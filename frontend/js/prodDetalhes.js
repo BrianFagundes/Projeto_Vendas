@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const irParaCarrinhoButton = document.getElementById('irParaCarrinhoButton');
         irParaCarrinhoButton.addEventListener('click', function () {
             // Redirecionar o usuário para a página do carrinho
-            window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
+            window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
     });
 
 

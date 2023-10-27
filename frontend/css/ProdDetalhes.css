@@ -154,13 +154,10 @@ button[type="submit"] {
 
 #irParaCarrinhoButton {
     background-color: #0059ff;
-    color: #ffffff;
-    padding: 10px 30px;
+    color: #ffffff; /* Texto branco */
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
+    margin: 0 auto; /* Centraliza o botão na horizontal */
     display: block; /* Faz o botão ocupar toda a largura disponível */
-    position: absolute; /* Torna o botão posicionado em relação ao elemento pai */
-    left: 50%; /* Move o botão para o centro horizontal */
-    transform: translateX(-50%); /* Centraliza o botão horizontalmente */
-    top: 800px; /* Move o botão 10px para baixo em relação ao elemento pai */
 }
