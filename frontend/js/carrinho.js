@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const botaoAplicarDesconto = document.getElementById('aplicar-desconto');
 
 
+
     // Recupere os produtos do carrinho do localStorage
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     let historico = JSON.parse(localStorage.getItem('historico')) || [];
@@ -39,6 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <img src="${produto.Foto}" alt="${produto.Produto}">
                     <p>Preço: R$ ${parseFloat(produto.PRECO).toFixed(2)}</p>
                     <!-- Adicione outros detalhes do produto, se necessário -->
+                    <button class="remover-produto" data-produto-index="${index}">Remover</button><br><br>
+                    <input type="text" id="descontoProduto-${index}" placeholder="Porcentagem ou Valor de desconto"><br><br>
+                    <button class="aplicar-desconto-produto" data-produto-index="${index}">Aplicar Desconto</button><br><br>
+
                     <button class="remover-produto" data-produto-index="${index}">Remover</button><br><br>
                     <input type="text" id="descontoProduto-${index}" placeholder="Porcentagem ou Valor de desconto"><br><br>
                     <button class="aplicar-desconto-produto" data-produto-index="${index}">Aplicar Desconto</button><br><br>
@@ -197,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
         atualizarCarrinho();
 
         window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html';
+        window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html';
     });
 
 
@@ -205,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const AddProdButton = document.getElementById('addmaisprodutos');
     AddProdButton.addEventListener('click', function () {
         // Volta para a página anterior
+        window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html';
         window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html';
 
     });

@@ -159,5 +159,6 @@ button[type="submit"] {
     border: none;
     cursor: pointer;
     margin: 0 auto; /* Centraliza o botão na horizontal */
+    margin: 0 auto; /* Centraliza o botão na horizontal */
     display: block; /* Faz o botão ocupar toda a largura disponível */
 }
