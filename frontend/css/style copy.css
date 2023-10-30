@@ -49,14 +49,14 @@ input[type="text"] {
     width: 25%;
     padding: 10px;
     margin: 0 auto; /* Centraliza os elementos na horizontal */
-    border: 4px solid #565656; /* Borda azul */
+    border: 4px solid #E0E0E0; /* Borda cinza */
     display: block; /* Faz com que os elementos ocupem toda a largura disponível */
 }
 
 /* Estiliza o botão de consultar */
 button[type="submit"] {
-    background-color: #565656; /* Fundo azul */
-    color: #ffffff; /* Texto branco */
+    background-color: #E0E0E0; /* Fundo cinza */
+    color: #000000; /* Texto branco */
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -125,11 +125,19 @@ button[type="submit"] {
 }
 
 #irParaCarrinhoButton {
-    background-color: #0059ff; /* Fundo azul */
-    color: #ffffff; /* Texto branco */
+    background-color: #FFAA00; /* Fundo amarelo */
+    color: #000000; /* Texto branco */
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     margin: 0 auto; /* Centraliza o botão na horizontal */
     display: block; /* Faz o botão ocupar toda a largura disponível */
+}
+
+/* Estilza o Logo */
+
+.centered-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%; /* Define a largura máxima da imagem como 100% do contêiner */
 }
