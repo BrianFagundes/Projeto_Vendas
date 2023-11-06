@@ -10,6 +10,7 @@ router.get('/tasks', tasksController.getAll);
 router.get('/products', tasksController.getProducts);
 router.post('/login', tasksController.login);
 router.post('/produto', tasksController.produto);
+router.post('/estoque', tasksController.estoque);
 
 
 

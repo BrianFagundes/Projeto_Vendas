@@ -7,17 +7,33 @@
     <title>Carrinho de Compras</title>
 </head>
 <body>
+    <br><br>
+
+    <img src="./Imagens/Logo maxior.svg" alt="Logo" class="centered-image"><br><br>
+
     <h1>Carrinho de Compras</h1>
     <div id="carrinhoContainer">
         <!-- Aqui serão exibidos os produtos do carrinho -->
     </div>
 
-        <input type="text" id="desconto" placeholder="Porcentagem de desconto"><br><br>
+        <input type="text" id="desconto" placeholder="Porcentagem ou Valor de desconto"><br><br>
         <button id="aplicar-desconto">Aplicar Desconto</button><br>
         <button id="limpar-carrinho">Limpar Carrinho</button><br><br>
-
         <button id="addmaisprodutos">Adicionar mais produtos</button><br><br>
+        <button id="reverter-precos">Reverter para os Preços Originais</button><br><br><br>
         <button id="finalizar">Finalizar compra</button><br><br>
+        <button id="historico-button">Histórico de Pesquisa</button>
+
+
+        <div id="historico-container" class="historico-container">
+            <button id="fechar-historico" class="fechar-historico">Fechar</button> <!-- Botão para fechar a barra lateral -->
+            <div class="sidebar" id="sidebar">
+
+                            <!-- Itens do histórico serão inseridos aqui -->
+            </div>
+ 
+        </div>
+
 
     <script src="./js/carrinho.js"></script>
 </body>

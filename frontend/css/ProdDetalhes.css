@@ -108,7 +108,7 @@ button[type="submit"] {
 .product-price {
     font-size: 20px;
     font-weight: bold;
-    color: #007bff; /* Cor do preço (azul) */
+    color: #000000; /* Cor do preço (azul) */
     text-align: center; /* Centraliza o texto horizontalmente */
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
 }
@@ -127,8 +127,8 @@ button[type="submit"] {
 
 /* Estilos para centralizar o botão Voltar */
 #voltarButton {
-    background-color: #565656; /* Fundo azul */
-    color: #ffffff; /* Texto branco */
+    background-color: #E0E0E0; /* Fundo azul */
+    color: #000000; /* Texto branco */
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -153,14 +153,11 @@ button[type="submit"] {
 }
 
 #irParaCarrinhoButton {
-    background-color: #0059ff;
-    color: #ffffff;
+    background-color: #FFAA00;
+    color: #ffffff; /* Texto branco */
     padding: 10px 30px;
     border: none;
     cursor: pointer;
+    margin: 0 auto; /* Centraliza o botão na horizontal */
     display: block; /* Faz o botão ocupar toda a largura disponível */
-    position: absolute; /* Torna o botão posicionado em relação ao elemento pai */
-    left: 50%; /* Move o botão para o centro horizontal */
-    transform: translateX(-50%); /* Centraliza o botão horizontalmente */
-    top: 800px; /* Move o botão 10px para baixo em relação ao elemento pai */
 }

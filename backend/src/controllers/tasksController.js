@@ -44,9 +44,25 @@ const getProducts = async (request, response) => {
     }
   };
 
+  const estoque = async (request, response) => {
+    try{
+      const {codpro, numsep} = request.body;
+      const result = await tasksModel.ConsultaEstoque(codpro,numsep);
+
+      if(result){
+        response.status(200).json({sucess: true, message: 'Consulta realizada com sucesso', data: result});
+      } else {
+        response.status(401).json({sucess: false, message: 'Código de produto inválido'});
+      }
+    } catch (error){
+      console.error(error);
+      response.status(500).json({sucess: false, message: 'Erro no servidor'});
+    }
+  };
 module.exports =  {
     getAll,
     getProducts,
     login,
     produto,
+    estoque
 };
