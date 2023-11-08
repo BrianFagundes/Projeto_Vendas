@@ -44,6 +44,7 @@ button {
     margin: 5px;
     cursor: pointer;
     border-radius: 5px;
+    width: 100%;
 }
 
 button:hover {
@@ -52,9 +53,9 @@ button:hover {
 
 #desconto {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 5px;
-    width: 80%;
+    width: 95%;
     margin-bottom: 10px;
 }
 

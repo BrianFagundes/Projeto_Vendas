@@ -74,35 +74,6 @@ const verifyLogin = async (codrep) => {
   }
 };
 
-const ConsultaEstoque = async (codpro, numsep) => {
-  try {
-    const pool = await sql.connect(connection.config);
-    const request = pool.request();
-    request.input('codpro', sql.VarChar, codpro);
-    request.input('numsep', sql.VarChar, numsep);
-
-    const result = await request.query(`
-     SELECT 
-        b.codref AS referencia,
-        SUM(a.qtdest) AS quantidade
-     FROM e210dls a 
-     INNER JOIN e075pro b ON a.codpro = b.codpro
-     WHERE a.codpro = @codpro OR a.numsep = @numsep
-     GROUP BY b.codref;
-        `);
-    if (result.recordset.length === 1) {
-      //caso existir um unico retorna a resposta
-      return result.recordset[0];
-    } else {
-      // Caso não retornar resultados, retorna null
-      return null;
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
 const verifyProducts = async (codpro, numsep) => {
   try {
     const pool = await sql.connect(connection.config);
@@ -153,10 +124,34 @@ WHERE a.codpro = @codpro OR a.numsep = @numsep;
   }
 };
 
+const codbar = async (numsep) =>{
+  try{
+    const pool = await sql.connect(connection.config);
+    const request = pool.request();
+
+    request.input('numsep', sql.VarChar, numsep);
+
+    const result = await request.query(`
+    
+    select distinct codpro from e210dls where numsep= @numsep
+    
+    `);
+
+    if (result.recordset.length ===  1){
+      return result.recordset[0];
+    }else {
+      return null
+    }
+  } catch(error){
+    console.error(error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAll,
   getProducts,
   verifyLogin,
   verifyProducts,
-  ConsultaEstoque,
+  codbar
 };

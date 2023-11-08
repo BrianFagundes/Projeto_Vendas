@@ -44,25 +44,25 @@ const getProducts = async (request, response) => {
     }
   };
 
-  const estoque = async (request, response) => {
+  const codbar = async (request, response) => {
     try{
-      const {codpro, numsep} = request.body;
-      const result = await tasksModel.ConsultaEstoque(codpro,numsep);
+      const {numsep} = request.body;
+      const result = await tasksModel.codbar(numsep);
 
       if(result){
-        response.status(200).json({sucess: true, message: 'Consulta realizada com sucesso', data: result});
-      } else {
-        response.status(401).json({sucess: false, message: 'Código de produto inválido'});
+        response.status(200).json({success: true, message: "NumSep convertido", data: result});
+      }else{
+        response.status(401).json({sucess: false, message: "NumSep Inválido"});
       }
-    } catch (error){
+    }catch (error){
       console.error(error);
-      response.status(500).json({sucess: false, message: 'Erro no servidor'});
+      response.status(500).json({sucess: false, message: "Erro no servidor"});
     }
-  };
+  }
 module.exports =  {
     getAll,
     getProducts,
     login,
     produto,
-    estoque
+    codbar
 };
