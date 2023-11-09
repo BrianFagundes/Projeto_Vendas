@@ -11,6 +11,7 @@ router.get('/products', tasksController.getProducts);
 router.post('/login', tasksController.login);
 router.post('/produto', tasksController.produto);
 router.post('/codbar', tasksController.codbar);
+router.post('/info', tasksController.InfoPlus);
 
 
 

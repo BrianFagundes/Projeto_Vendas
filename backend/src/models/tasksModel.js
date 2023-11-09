@@ -148,10 +148,47 @@ const codbar = async (numsep) =>{
   }
 };
 
+const InfoPlus = async (codpro) => {
+  try{
+    const pool = await sql.connect(connection.config);
+    const request = pool.request();
+
+    request.input('codpro', sql.VarChar, codpro);
+
+    const result = await request.query(`
+    
+    SELECT
+      b.codpro AS referencia,
+      a.codder AS tamanho,
+      a.coddep AS deposito,
+      c.abrdep AS loja,
+      a.numsep AS serie,
+      a.usu_codend AS local,
+      SUM(a.qtdest) AS quantidade
+    FROM e210dls a 
+    INNER JOIN e075pro b ON a.codpro = b.codpro
+    INNER JOIN e205dep c on a.coddep = c.coddep
+    WHERE (a.codpro = @codpro ) and a.qtdest>0
+    GROUP BY b.codpro,a.codder,a.coddep,c.abrdep,a.numsep,a.usu_codend;
+  
+    `);
+
+    if (result.recordset){
+      return result.recordset[0];
+    }else {
+      return null;
+    }
+  }catch(error){
+    console.error(error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAll,
   getProducts,
   verifyLogin,
   verifyProducts,
-  codbar
+  codbar,
+  InfoPlus,
 };

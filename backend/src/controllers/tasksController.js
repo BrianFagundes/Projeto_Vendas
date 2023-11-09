@@ -58,12 +58,12 @@ const getProducts = async (request, response) => {
       console.error(error);
       response.status(500).json({sucess: false, message: "Erro no servidor"});
     }
-  }
+  };
 
-  const Estoque = async (request, response) => {
+  const InfoPlus = async (request, response) => {
     try{
-      const {codpro} = request.body;
-      const result = await tasksModel.Estoque(codpro);
+      const {codpro, numsep} = request.body;
+      const result = await tasksModel.InfoPlus(codpro,numsep);
 
       if(result){
         response.status(200).json({success: true, message: "Consulta bem-sucedida", data: result});
@@ -74,7 +74,7 @@ const getProducts = async (request, response) => {
       console.error(error);
       response.status(500).json({sucess: false, message: "Erro no servidor"});
     }
-  }
+  };
 
   
 module.exports =  {
@@ -83,5 +83,5 @@ module.exports =  {
     login,
     produto,
     codbar,
-    Estoque
+    InfoPlus,
 };
