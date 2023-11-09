@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.success) {
                 // Login bem-sucedido, redirecionar o usuário para a segunda tela
-                window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html'; // Substitua pelo URL da segunda tela
+
+                window.location.href = 'http://127.0.0.1:5500/frontend/produto.html';        
+                //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html'; // Ambiente de produção   
             } else {
                 // Login inválido, exibir uma mensagem de erro para o usuário
                 messageDiv.innerText = data.message;

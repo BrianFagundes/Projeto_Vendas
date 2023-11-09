@@ -59,10 +59,29 @@ const getProducts = async (request, response) => {
       response.status(500).json({sucess: false, message: "Erro no servidor"});
     }
   }
+
+  const Estoque = async (request, response) => {
+    try{
+      const {codpro} = request.body;
+      const result = await tasksModel.Estoque(codpro);
+
+      if(result){
+        response.status(200).json({success: true, message: "Consulta bem-sucedida", data: result});
+      }else{
+        response.status(401).json({sucess: false, message: "Código de produto inválido"});
+      }
+    }catch (error){
+      console.error(error);
+      response.status(500).json({sucess: false, message: "Erro no servidor"});
+    }
+  }
+
+  
 module.exports =  {
     getAll,
     getProducts,
     login,
     produto,
-    codbar
+    codbar,
+    Estoque
 };

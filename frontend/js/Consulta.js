@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
      const irParaCarrinhoButton = document.getElementById('irParaCarrinhoButton');
      irParaCarrinhoButton.addEventListener('click', function () {
          // Redirecionar o usuário para a página do carrinho
-         window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
+         window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html';
+         //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
  });
 
     form.addEventListener('submit', async function (event) {
@@ -67,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 productDiv.style.display = 'block';
             
                                 localStorage.setItem('productData', JSON.stringify(data.data));
-                                window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/ProdDetalhes.html';
+                                window.location.href = 'http://127.0.0.1:5500/frontend/ProdDetalhes.html';
+                                //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/ProdDetalhes.html'; //Ambiente de prod
             
                                 resultDiv.innerHTML = ''; // Limpa a mensagem de resultado anterior
                             } else {
@@ -131,7 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     productDiv.style.display = 'block';
 
                     localStorage.setItem('productData', JSON.stringify(data.data));
-                    window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/ProdDetalhes.html';
+                    window.location.href = 'http://127.0.0.1:5500/frontend/ProdDetalhes.html';
+                    //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/ProdDetalhes.html'; // Ambiente de prod
 
                     resultDiv.innerHTML = ''; // Limpa a mensagem de resultado anterior
                 } else {

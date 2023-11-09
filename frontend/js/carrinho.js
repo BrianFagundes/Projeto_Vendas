@@ -217,8 +217,8 @@ document.addEventListener('DOMContentLoaded', function () {
         carrinho = [];
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
         atualizarCarrinho();
-
-        window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html';
+        window.location.href = 'http://127.0.0.1:5500/frontend/produto.html';
+        //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html'; // Ambiente Prod
     });
 
 
@@ -227,7 +227,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const AddProdButton = document.getElementById('addmaisprodutos');
     AddProdButton.addEventListener('click', function () {
         // Volta para a página anterior
-        window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html';
+
+        window.location.href = 'http://127.0.0.1:5500/frontend/produto.html';
+        //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html'; //  Ambiente de Prod
 
     });
 
