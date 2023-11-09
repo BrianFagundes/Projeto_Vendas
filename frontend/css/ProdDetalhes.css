@@ -132,7 +132,7 @@ button[type="submit"] {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    position: fixed; /* Torna o botão posicionado na tela */
+    margin: 0 auto; /* Centraliza o botão na horizontal */
     bottom: 1em; /* Distância a partir do fundo */
     right: 1em; /* Distância a partir da direita */
     display: block; /* Faz o botão ocupar toda a largura disponível */
@@ -160,4 +160,42 @@ button[type="submit"] {
     cursor: pointer;
     margin: 0 auto; /* Centraliza o botão na horizontal */
     display: block; /* Faz o botão ocupar toda a largura disponível */
+}
+#irParaMenuButton{
+    background-color: #990000;
+    color: #ffffff; /* Texto branco */
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto; /* Centraliza o botão na horizontal */
+    display: block; /* Faz o botão ocupar toda a largura disponível */
+}
+
+#lista-estoque {
+    list-style-type: none; /* Remover marcadores de lista padrão */
+    padding: 0;
+  }
+  
+  #lista-estoque li {
+    margin-bottom: 10px; /* Espaçamento entre itens da lista */
+    border: 1px solid #ddd; /* Adicionar uma borda aos itens da lista */
+    padding: 10px; /* Espaçamento interno dos itens da lista */
+    background-color: #f5f5f5; /* Cor de fundo de cada item */
+  }
+  
+  #lista-estoque li:hover {
+    background-color: #e0e0e0; /* Cor de fundo quando o item é destacado */
+  }
+  
+  /* Adicione espaço entre as colunas da tabela */
+td {
+    padding: 15px; /* Ajuste o valor conforme necessário */
+}
+/* Defina uma cor de fundo para toda a tabela */
+table {
+    background-color: #f0f0f0; /* Substitua pela cor desejada */
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Adiciona uma borda à tabela */
+    margin: 0 auto; /* Centraliza a tabela na tela */
+    width: 80%; /* Ajusta a largura da tabela */
 }

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
      irParaCarrinhoButton.addEventListener('click', function () {
          // Redirecionar o usuário para a página do carrinho
          window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html';
-         //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
+         //window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/carrinho.html'; // Substitua pelo URL da página do carrinho
  });
 
     form.addEventListener('submit', async function (event) {
@@ -18,9 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
         let codpro = document.getElementById('codpro').value;
         const numsep = document.getElementById('numsep').value;
 
+        
+
         if(codpro == ""){
         try {
-            const response = await fetch('http://192.168.4.5:3333/codbar', {
+            const response = await fetch('http://localhost:3333/codbar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,9 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     const dadosConsulta2 = data.data.codpro;
                     console.log(dadosConsulta2)
                     codpro = dadosConsulta2;
-
+                    localStorage.setItem('codpro', codpro);
+                    
                     try {
-                        const response = await fetch('http://192.168.4.5:3333/produto', {
+                        const response = await fetch('http://localhost:3333/produto', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -69,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
                                 localStorage.setItem('productData', JSON.stringify(data.data));
                                 window.location.href = 'http://127.0.0.1:5500/frontend/ProdDetalhes.html';
-                                //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/ProdDetalhes.html'; //Ambiente de prod
+                                //window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/ProdDetalhes.html'; //Ambiente de prod
             
                                 resultDiv.innerHTML = ''; // Limpa a mensagem de resultado anterior
                             } else {
@@ -102,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     } else{
         try {
-            const response = await fetch('http://192.168.4.5:3333/produto', {
+            const response = await fetch('http://localhost:3333/produto', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -115,6 +118,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.success) {
                     // Aqui você acessa os dados da consulta
                     const dadosConsulta = data.data;
+                    localStorage.setItem('codpro', codpro);
+
 
                     // Preenche os elementos com os dados do produto
                     document.getElementById('productImage').src = dadosConsulta.Foto;
@@ -134,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     localStorage.setItem('productData', JSON.stringify(data.data));
                     window.location.href = 'http://127.0.0.1:5500/frontend/ProdDetalhes.html';
-                    //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/ProdDetalhes.html'; // Ambiente de prod
+                    //window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/ProdDetalhes.html'; // Ambiente de prod
 
                     resultDiv.innerHTML = ''; // Limpa a mensagem de resultado anterior
                 } else {
@@ -153,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
     });
+
+
 });
 
 

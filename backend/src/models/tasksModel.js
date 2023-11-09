@@ -174,7 +174,7 @@ const InfoPlus = async (codpro) => {
     `);
 
     if (result.recordset){
-      return result.recordset[0];
+      return result.recordset;
     }else {
       return null;
     }

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const codrep = document.getElementById('codrep').value;
 
         // Enviar uma solicitação POST ao backend com o código de representante
-        fetch('http://192.168.4.5:3333/login', {
+        fetch('http://localhost:3333/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Login bem-sucedido, redirecionar o usuário para a segunda tela
 
                 window.location.href = 'http://127.0.0.1:5500/frontend/produto.html';        
-                //window.location.href = 'http://192.168.4.5:8080/ProjetoHTML/frontend/produto.html'; // Ambiente de produção   
+                //window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/produto.html'; // Ambiente de produção   
             } else {
                 // Login inválido, exibir uma mensagem de erro para o usuário
                 messageDiv.innerText = data.message;
