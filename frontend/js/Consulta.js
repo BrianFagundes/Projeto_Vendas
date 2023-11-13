@@ -3,6 +3,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultDiv = document.getElementById('result');
     const productDiv = document.querySelector('.container'); // Seleciona a div dos detalhes do produto
 
+            // Verificar se o cookie de acesso anterior existe
+            const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('acessoAnterior='))
+            ?.split('=')[1];
+
+        if (cookieValue !== 'true') {
+            // Redirecionar para a página anterior se o cookie não existir
+            window.location.href = 'http://127.0.0.1:5500/index.html';
+        }
+
      // Ir para Carrinho
 
      const irParaCarrinhoButton = document.getElementById('irParaCarrinhoButton');

@@ -33,5 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
             messageDiv.innerText = 'Erro no servidor';
         });
     });
+
+    // Configurar um cookie ao acessar esta página
+    document.cookie = "acessoAnterior=true; path=/";
 });
 
