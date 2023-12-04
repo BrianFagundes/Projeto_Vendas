@@ -152,14 +152,20 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({codpro}),
+            body: JSON.stringify({ codpro }),
         })
         .then(response => response.json())
         .then(data => {
-            // Manipule os dados da resposta, se 
-            const suggestedProducts = data.data;
-            displaySuggestedProducts(suggestedProducts);
-            console.log(data);
+            if (data.success) {
+                // Filtrar os produtos cujo oitavo caractere do campo "Produto" SEJA igual a "M"
+                const filteredProducts = data.data.filter(product => product.Produto.charAt(7) !== 'M');
+                
+                // Chamar a função para exibir os produtos filtrados
+                displaySuggestedProducts(filteredProducts);
+                console.log(filteredProducts);
+            } else {
+                console.error('Erro na solicitação da API', data.message);
+            }
         })
         .catch(error => {
             console.error('Erro ao buscar dados de produtos sugeridos', error);
