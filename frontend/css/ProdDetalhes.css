@@ -289,8 +289,12 @@ body {
 }
 
 .suggested-product-info {
+  color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Adicione outras propriedades de estilo necessárias para o contêiner */
 }
 
 .suggested-product-code {
@@ -311,3 +315,10 @@ body {
   font-size: 14px;
   /* Outros estilos necessários para o preço */
 }
+/* Estilos para a linha separadora */
+hr {
+  border: none;
+  border-top: 1px solid #ccc; /* Cor da linha separadora */
+  margin: 5px 0; /* Espaçamento entre as linhas */
+}
+

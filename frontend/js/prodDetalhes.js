@@ -222,7 +222,7 @@ function displaySuggestedProducts(suggestedProducts) {
     const sidebarContent = document.getElementById('sidebarContent');
     sidebarContent.innerHTML = ''; // Limpa o conteúdo anterior do sidebar
 
-    suggestedProducts.forEach(product => {
+    suggestedProducts.forEach((product, index )=> {
         const productDiv = document.createElement('div');
         productDiv.classList.add('suggested-product');
 
@@ -236,18 +236,17 @@ function displaySuggestedProducts(suggestedProducts) {
         const infoContainer = document.createElement('div');
         infoContainer.classList.add('suggested-product-info');
 
-        const productName = document.createElement('p');
-        const productNameText = product.Produto.substring(11); // Obtém o nome do produto a partir do 8º caractere
-        productName.textContent = `${productNameText}`;
-        productName.classList.add('suggested-product-name'); // Adiciona uma classe para estilização
-        infoContainer.appendChild(productName);
-
-
         const productCode = document.createElement('p');
         const productCodeText = product.Produto.substring(0, 8); // Obtém os primeiros 8 caracteres do código do produto
         productCode.textContent = `${productCodeText}`;
         productCode.classList.add('suggested-product-code'); // Adiciona uma classe para estilização
         infoContainer.appendChild(productCode);
+
+        const productName = document.createElement('p');
+        const productNameText = product.Produto.substring(11); // Obtém o nome do produto a partir do 8º caractere
+        productName.textContent = `${productNameText}`;
+        productName.classList.add('suggested-product-name'); // Adiciona uma classe para estilização
+        infoContainer.appendChild(productName);
 
         const productPrice = document.createElement('p');
         const formattedPrice = parseFloat(product.PRECO).toFixed(2);
@@ -288,5 +287,11 @@ function displaySuggestedProducts(suggestedProducts) {
 
         // Adiciona o produto ao sidebar
         sidebarContent.appendChild(productDiv);
+
+        // Adiciona linha separadora entre os produtos, exceto após o último
+        if (index !== suggestedProducts.length - 1) {
+            const separatorLine = document.createElement('hr');
+            sidebarContent.appendChild(separatorLine);
+        }
     });
 }
