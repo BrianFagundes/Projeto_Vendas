@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     
     const productData = JSON.parse(localStorage.getItem('productData'));
+    console.log(productData)
     let codpro = productData.Produto.substring(0, 8);
     console.log(codpro);
 
@@ -253,6 +254,35 @@ function displaySuggestedProducts(suggestedProducts) {
         productPrice.textContent = `R$ ${formattedPrice}`;
         productPrice.classList.add('suggested-product-price'); // Adiciona uma classe para estilização
         infoContainer.appendChild(productPrice);
+        
+        
+        // Adiciona um evento de clique ao produto sugerido
+        productDiv.addEventListener('click', () => {
+            const codpro = productCodeText; // Altere esta linha se necessário para obter o código do produto
+
+            // Realiza uma solicitação POST para obter os detalhes do produto
+            fetch('http://localhost:3333/produto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ codpro }),
+            })
+            .then(response => response.json())
+            .then(productDetails => {
+                // Redireciona para a página 'prodDetalhes' com os detalhes do produto
+                localStorage.setItem('productData', JSON.stringify(productDetails.data));
+                const productData = JSON.parse(localStorage.getItem('productData'));
+                console.log(productData)
+                setTimeout(() => {
+                    window.location.href = 'http://127.0.0.1:5500/frontend/prodDetalhes.html';
+                    // window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/prodDetalhes.html'; // ambiente de prod
+                }, 200); 
+            })
+            .catch(error => {
+                console.error('Erro ao buscar detalhes do produto', error);
+            });
+        });
 
         productDiv.appendChild(infoContainer);
 
