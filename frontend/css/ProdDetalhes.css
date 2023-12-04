@@ -164,7 +164,7 @@ button[type="submit"] {
 #irParaMenuButton{
     background-color: #990000;
     color: #ffffff; /* Texto branco */
-    padding: 10px 30px;
+    padding: 10px 44px;
     border: none;
     cursor: pointer;
     margin: 0 auto; /* Centraliza o botão na horizontal */
@@ -198,4 +198,116 @@ table {
     border: 1px solid #ddd; /* Adiciona uma borda à tabela */
     margin: 0 auto; /* Centraliza a tabela na tela */
     width: 80%; /* Ajusta a largura da tabela */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+
+  /*Estiliza o menu lateral*/
+  .sidebar {
+    height: 100%;
+    width: 350px;
+    position: fixed;
+    top: 0;
+    left: -350px;
+    background-color: #333;
+    transition: 0.3s;
+    overflow-y: auto;
+    padding-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+  }
+  
+  .menu-btn {
+    cursor: pointer;
+    padding: 7px;
+    background-color: #333;
+    color: white;
+    width: 150px;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 auto;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .menu-btn:hover {
+    background-color: #555;
+  }
+  
+  /* Estilos adicionais para o botão de fechar */
+.close-btn {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 10px;
+  background-color: #333;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #555;
+}
+/* Resto dos estilos */
+/* ... */
+.suggested-product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.suggested-product-image {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.suggested-product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggested-product-code {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.suggested-product-name {
+  color: white;
+  font-size: 12px;
+  font-weight: bold; /* Para destacar o nome do produto */
+  /* Outros estilos necessários para o nome do produto */
+}
+
+.suggested-product-price {
+  color: white;
+  font-size: 14px;
+  /* Outros estilos necessários para o preço */
 }

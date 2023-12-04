@@ -184,11 +184,69 @@ const InfoPlus = async (codpro) => {
   }
 };
 
+const prodSugeridos = async (codpro) => {
+  try {
+    const pool = await sql.connect(connection.config);
+    const request = pool.request();
+
+    request.input('codpro', sql.VarChar, codpro);
+
+    const result = await request.query(`
+      SELECT usu_profor FROM e075pro WHERE codpro = @codpro
+    `);
+
+    if (result.recordset && result.recordset.length > 0) {
+      const modifiedResults = result.recordset.map((record) => {
+        if (record.usu_profor && record.usu_profor.length > 2) {
+          record.usu_profor = record.usu_profor.substring(2, 8);
+        }
+        return record;
+      });
+
+      // Obtendo o resultado manipulado para a próxima consulta
+      const resultadoManipulado = modifiedResults.map((record) => record.usu_profor);
+
+      // Consulta usando o resultado manipulado para coletar o campo 'codpro'
+      const likeQuery = `SELECT codpro FROM e075pro WHERE usu_profor LIKE @resultado`;
+      const likeRequest = pool.request();
+      likeRequest.input('resultado', sql.VarChar, `%${resultadoManipulado}%`);
+      const likeResult = await likeRequest.query(likeQuery);
+
+      if (likeResult.recordset && likeResult.recordset.length > 0) {
+        const productsInfo = [];
+
+        for (const item of likeResult.recordset) {
+          const productInfo = await verifyProducts(item.codpro); // Substitua 'numsep' pelo valor apropriado
+
+          if (productInfo) {
+            productsInfo.push(productInfo);
+          }
+        }
+
+        if (productsInfo.length > 0) {
+          return productsInfo;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+
+
 module.exports = {
   getAll,
   getProducts,
   verifyLogin,
   verifyProducts,
   codbar,
-  InfoPlus,
+  prodSugeridos,
+  InfoPlus
 };

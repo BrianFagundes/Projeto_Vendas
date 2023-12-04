@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+    
     const productData = JSON.parse(localStorage.getItem('productData'));
-    let codpro = localStorage.getItem('codpro');
+    let codpro = productData.Produto.substring(0, 8);
     console.log(codpro);
-
 
     //Adicionar Carrinho
     const adicionarCarrinhoButton = document.getElementById('adicionarCarrinhoButton');
@@ -43,19 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     
-    
-
     // Ir para Carrinho
-
     const irParaCarrinhoButton = document.getElementById('irParaCarrinhoButton');
         irParaCarrinhoButton.addEventListener('click', function () {
             // Redirecionar o usuário para a página do carrinho
-        
             window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html';
             //window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/carrinho.html'; // ambiente de prod
     });
-
-
 
     if (productData) {
         // Preencha os elementos com os dados do produto
@@ -72,16 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const precoFormatado = preco.toFixed(2); // Formata o número com duas casas decimais
         document.getElementById('productPrice').textContent = `R$ ${precoFormatado}`;
 
-        
-
         // Torna os detalhes do produto visíveis
         productDiv.style.display = 'block';
         // ... (preencha outros elementos com os dados do produto, se necessário)
     } else {
-        // Se não houver dados do produto em localStorage, exiba uma mensagem de erro ou redirecione o usuário de volta para a página anterior
         alert('Dados do produto não encontrados.');
-        // Ou redirecione para a página anterior
-        // window.location.href = 'pagina_anterior.html';
     }
    
 });
@@ -94,10 +83,10 @@ voltarButton.addEventListener('click', function () {
 
 });
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const estoqueList = document.getElementById('lista-estoque');
-    let codpro = localStorage.getItem('codpro');
+    const productData = JSON.parse(localStorage.getItem('productData'));
+    let codpro = productData.Produto.substring(0, 8);
 
     fetch('http://localhost:3333/info', {
         method: 'POST',
@@ -155,6 +144,28 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => {
         console.error('Erro ao buscar dados do estoque', error);
     });
+
+    function sugeridos (codpro){
+        fetch('http://localhost:3333/prodSugeridos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({codpro}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manipule os dados da resposta, se 
+            const suggestedProducts = data.data;
+            displaySuggestedProducts(suggestedProducts);
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados de produtos sugeridos', error);
+        });
+
+    }
+    sugeridos(codpro);
 });
 
 const toggleListButton = document.getElementById('irParaMenuButton');
@@ -176,4 +187,76 @@ toggleListButton.addEventListener('click', () => {
     }
 });
 
+// SideBar  
+const menuButton = document.querySelector('.menu-btn');
+const closeButton = document.querySelector('.close-btn');
+const sidebar = document.getElementById('sidebar');
+const content = document.querySelector('.content');
 
+let isSidebarOpen = false;
+
+function openSidebar() {
+    sidebar.style.left = '0';
+    content.style.marginLeft = '350px';
+    isSidebarOpen = true;
+}
+
+function closeSidebar() {
+    sidebar.style.left = '-350px';
+    content.style.marginLeft = '0';
+    isSidebarOpen = false;
+}
+
+menuButton.addEventListener('click', function() {
+    if (!isSidebarOpen) {
+        openSidebar();
+    } else {
+        closeSidebar();
+    }
+});
+
+closeButton.addEventListener('click', closeSidebar);
+
+function displaySuggestedProducts(suggestedProducts) {
+    const sidebarContent = document.getElementById('sidebarContent');
+    sidebarContent.innerHTML = ''; // Limpa o conteúdo anterior do sidebar
+
+    suggestedProducts.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('suggested-product');
+
+        // Cria elementos HTML para exibir a imagem e informações do produto
+        const productImage = document.createElement('img');
+        productImage.src = product.Foto;
+        productImage.alt = product.Produto;
+        productImage.classList.add('suggested-product-image');
+        productDiv.appendChild(productImage);
+
+        const infoContainer = document.createElement('div');
+        infoContainer.classList.add('suggested-product-info');
+
+        const productName = document.createElement('p');
+        const productNameText = product.Produto.substring(11); // Obtém o nome do produto a partir do 8º caractere
+        productName.textContent = `${productNameText}`;
+        productName.classList.add('suggested-product-name'); // Adiciona uma classe para estilização
+        infoContainer.appendChild(productName);
+
+
+        const productCode = document.createElement('p');
+        const productCodeText = product.Produto.substring(0, 8); // Obtém os primeiros 8 caracteres do código do produto
+        productCode.textContent = `${productCodeText}`;
+        productCode.classList.add('suggested-product-code'); // Adiciona uma classe para estilização
+        infoContainer.appendChild(productCode);
+
+        const productPrice = document.createElement('p');
+        const formattedPrice = parseFloat(product.PRECO).toFixed(2);
+        productPrice.textContent = `R$ ${formattedPrice}`;
+        productPrice.classList.add('suggested-product-price'); // Adiciona uma classe para estilização
+        infoContainer.appendChild(productPrice);
+
+        productDiv.appendChild(infoContainer);
+
+        // Adiciona o produto ao sidebar
+        sidebarContent.appendChild(productDiv);
+    });
+}

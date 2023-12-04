@@ -12,6 +12,7 @@ router.post('/login', tasksMiddleware.logAccess,tasksController.login);
 router.post('/produto', tasksController.produto);
 router.post('/codbar', tasksController.codbar);
 router.post('/info', tasksController.InfoPlus);
+router.post('/prodSugeridos', tasksController.prodSugeridos);
 
 
 
