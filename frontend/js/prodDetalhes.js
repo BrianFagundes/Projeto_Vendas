@@ -49,20 +49,19 @@ document.addEventListener('DOMContentLoaded', function () {
         irParaCarrinhoButton.addEventListener('click', function () {
             // Redirecionar o usuário para a página do carrinho
             window.location.href = 'http://127.0.0.1:5500/frontend/carrinho.html';
-            //window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/carrinho.html'; // ambiente de prod
+            //window.location.href = 'http://127.0.0.1:8080/ProjetoHTML/frontend/carrinho.html'; // ambiente de prod
     });
 
     if (productData) {
         // Preencha os elementos com os dados do produto
         document.getElementById('productImage').src = productData.Foto;
         document.getElementById('productName').textContent = productData.Produto;
+        document.getElementById('produto-titulo').textContent = productData.Titulo;
         // Divide a descrição da característica em linhas separadas
         const caracteristica = productData.Caracteristica.split('\n').map(line => line.trim()).join('<br>');
         const productDescription = document.getElementById('productDescription');
         productDescription.innerHTML = caracteristica;
         
-        document.getElementById('productEstoque').textContent = `Quantidade em estoque: ${productData.quantidade}`;
-
         const preco = parseFloat(productData.PRECO); // Converte a string para um número de ponto flutuante
         const precoFormatado = preco.toFixed(2); // Formata o número com duas casas decimais
         document.getElementById('productPrice').textContent = `R$ ${precoFormatado}`;
@@ -89,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const productData = JSON.parse(localStorage.getItem('productData'));
     let codpro = productData.Produto.substring(0, 8);
 
-    fetch('http://localhost:3333/info', {
+    fetch('http://127.0.0.1:3333/info', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -125,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             estoqueData.forEach(item => {
                 const row = document.createElement('tr');
-                const columns = ['tamanho', 'loja', 'serie', 'local'];
+                const columns = ['tamanho', 'lojas', 'serie', 'local'];
 
                 columns.forEach(columnName => {
                     const cell = document.createElement('td');
@@ -147,19 +146,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function sugeridos (codpro){
-        fetch('http://localhost:3333/prodSugeridos', {
+        fetch('http://127.0.0.1:3333/prodSugeridos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({codpro}),
+            body: JSON.stringify({ codpro }),
         })
         .then(response => response.json())
         .then(data => {
-            // Manipule os dados da resposta, se 
-            const suggestedProducts = data.data;
-            displaySuggestedProducts(suggestedProducts);
-            console.log(data);
+            if (data.success) {
+                // Filtrar os produtos cujo oitavo caractere do campo "Produto" SEJA igual a "M"
+                const filteredProducts = data.data.filter(product => product.Produto.charAt(7) !== 'M');
+                
+                // Chamar a função para exibir os produtos filtrados
+                displaySuggestedProducts(filteredProducts);
+                console.log(filteredProducts);
+            } else {
+                console.error('Erro na solicitação da API', data.message);
+            }
         })
         .catch(error => {
             console.error('Erro ao buscar dados de produtos sugeridos', error);
@@ -237,7 +242,7 @@ function displaySuggestedProducts(suggestedProducts) {
         infoContainer.classList.add('suggested-product-info');
 
         const productCode = document.createElement('p');
-        const productCodeText = product.Produto.substring(0, 8); // Obtém os primeiros 8 caracteres do código do produto
+        const productCodeText = product.Produto.substring(1, 7); // Obtém os primeiros 8 caracteres do código do produto
         productCode.textContent = `${productCodeText}`;
         productCode.classList.add('suggested-product-code'); // Adiciona uma classe para estilização
         infoContainer.appendChild(productCode);
@@ -260,7 +265,7 @@ function displaySuggestedProducts(suggestedProducts) {
             const codpro = productCodeText; // Altere esta linha se necessário para obter o código do produto
 
             // Realiza uma solicitação POST para obter os detalhes do produto
-            fetch('http://localhost:3333/produto', {
+            fetch('http://127.0.0.1:3333/produto', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -275,7 +280,7 @@ function displaySuggestedProducts(suggestedProducts) {
                 console.log(productData)
                 setTimeout(() => {
                     window.location.href = 'http://127.0.0.1:5500/frontend/prodDetalhes.html';
-                    // window.location.href = 'http://localhost:8080/ProjetoHTML/frontend/prodDetalhes.html'; // ambiente de prod
+                    // window.location.href = 'http://127.0.0.1:8080/ProjetoHTML/frontend/prodDetalhes.html'; // ambiente de prod
                 }, 200); 
             })
             .catch(error => {

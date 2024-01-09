@@ -4,8 +4,8 @@ const tasksModel = require('../models/tasksModel')
 const { MongoClient } = require('mongodb');
 
 const mongoURI = 'mongodb://127.0.0.1:27017'; // Substitua com suas configurações
-const dbName = 'teste'; // Substitua com o nome do seu banco de dados
-const collectionName = 'test'; // Substitua com
+const dbName = 'controlelog'; // Substitua com o nome do seu banco de dados
+const collectionName = 'log'; // Substitua com
 
 const client = new MongoClient(mongoURI);
 

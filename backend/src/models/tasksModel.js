@@ -62,10 +62,12 @@ const verifyLogin = async (codrep) => {
     request.input('codrep', sql.VarChar, codrep); // Declare o parâmetro 'codrep'
 
     const result = await request.query(`
-      SELECT a.codrep, b.nomrep
-      FROM e090var a
-      INNER JOIN e090rep b ON a.codrep = b.codrep
-      WHERE a.codrep = @codrep
+    select 
+    iclis as codrep,
+    rclis as nomrep 
+    from sljcli 
+    where 
+    grupos='VENDEDOR' and iclis= @codrep
     `);
 
     return result.recordset.length === 1;
@@ -84,31 +86,16 @@ const verifyProducts = async (codpro, numsep) => {
     request.input('numsep', sql.VarChar, numsep); // Declare o parâmetro 'codpro'
 
     const result = await request.query(`
-    SELECT DISTINCT
-    CONCAT(b.codpro,' - ',b.despro) as Produto,
-    b.usu_tspajb as Titulo,
-    b.usu_dapajb as Caracteristica,
+    select 
+    REPLACE(cpros,' ','') as Produto,
+    REPLACE(dpros,' ','') as Titulo,
+    REPLACE(colecoes,' ','') as Caracteristica,
     CASE
-      WHEN b.usu_codseg='2' AND b.usu_moeven='AU' then REPLACE(ROUND(b.usu_preven*678,0),'.',',')
-      WHEN b.usu_codseg='1' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)+((b.usu_preven*678)/100*10)),0),'.',',')
-      WHEN b.usu_codseg='3' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)-((b.usu_preven*678)/100*10)),0),'.',',')
-      WHEN b.usu_codseg='4' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)-((b.usu_preven*678)/100*20)),0),'.',',')
-      WHEN b.usu_codseg='5' AND b.usu_moeven='AU' then REPLACE(ROUND(((b.usu_preven*678)-((b.usu_preven*678)/100*30)),0),'.',',')
-      WHEN b.usu_codseg='2' AND b.usu_moeven<>'AU' then REPLACE(ROUND(b.usu_preven,0),'.',',')
-      WHEN b.usu_codseg='1' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)+((b.usu_preven)/100*10)),0),'.',',')
-      WHEN b.usu_codseg='3' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)-((b.usu_preven)/100*10)),0),'.',',')
-      WHEN b.usu_codseg='4' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)-((b.usu_preven)/100*20)),0),'.',',')
-      WHEN b.usu_codseg='5' AND b.usu_moeven<>'AU' then REPLACE(ROUND(((b.usu_preven)-((b.usu_preven)/100*30)),0),'.',',')
+              WHEN moevs='AU' then REPLACE(ROUND(pvens*678,0),'.',',')
+              WHEN moevs<>'AU' then REPLACE(ROUND(pvens,0),'.',',')
     END AS PRECO,
-    CONCAT('http://joias.synergie.com.br/uploads/produtos/',b.codref,'.jpg') as Foto,
-    (SELECT SUM(a.qtdest) 
-     FROM e210dls a 
-     INNER JOIN e075pro b ON a.codpro = b.codpro
-     WHERE (a.codpro = @codpro OR a.numsep = @numsep) 
-     GROUP BY b.codref) AS quantidade
-FROM e210dls a
-INNER JOIN e075pro b ON a.codpro = b.codpro
-WHERE a.codpro = @codpro OR a.numsep = @numsep;
+    CONCAT('http://127.0.0.1/ProjetoHTML/Fotos/',REPLACE(cpros,' ',''),'.jpg') as Foto
+    from sljpro where cpros=@codpro
     `);
 
     if (result.recordset.length === 1) {
@@ -133,7 +120,7 @@ const codbar = async (numsep) =>{
 
     const result = await request.query(`
     
-    select distinct codpro from e210dls where numsep= @numsep
+    select distinct cpros from sljeti where cbars = @numsep
     
     `);
 
@@ -158,18 +145,16 @@ const InfoPlus = async (codpro) => {
     const result = await request.query(`
     
     SELECT
-      b.codpro AS referencia,
-      a.codder AS tamanho,
-      a.coddep AS deposito,
-      c.abrdep AS loja,
-      a.numsep AS serie,
-      a.usu_codend AS local,
-      SUM(a.qtdest) AS quantidade
-    FROM e210dls a 
-    INNER JOIN e075pro b ON a.codpro = b.codpro
-    INNER JOIN e205dep c on a.coddep = c.coddep
-    WHERE (a.codpro = @codpro ) and a.qtdest>0
-    GROUP BY b.codpro,a.codder,a.coddep,c.abrdep,a.numsep,a.usu_codend;
+    cpros as referencia,
+    codcors as cor,
+    codtams as tamanho,
+    empos as lojas,
+    cbars as serie,
+    localizas as local,
+    qtds as quantidade
+    from
+    sljeti
+    where qtds>0 and grupos='ESTOQUE' and contas='ESTOQUE' and cpros= @codpro
   
     `);
 
@@ -192,7 +177,8 @@ const prodSugeridos = async (codpro) => {
     request.input('codpro', sql.VarChar, codpro);
 
     const result = await request.query(`
-      SELECT usu_profor FROM e075pro WHERE codpro = @codpro
+    select reffs from sljpro where cpros= @codpro
+
     `);
 
     if (result.recordset && result.recordset.length > 0) {
@@ -207,7 +193,7 @@ const prodSugeridos = async (codpro) => {
       const resultadoManipulado = modifiedResults.map((record) => record.usu_profor);
 
       // Consulta usando o resultado manipulado para coletar o campo 'codpro'
-      const likeQuery = `SELECT codpro FROM e075pro WHERE usu_profor LIKE @resultado`;
+      const likeQuery = `select cpros from sljpro where reffs like @resultado`;
       const likeRequest = pool.request();
       likeRequest.input('resultado', sql.VarChar, `%${resultadoManipulado}%`);
       const likeResult = await likeRequest.query(likeQuery);

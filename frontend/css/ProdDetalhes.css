@@ -82,6 +82,15 @@ button[type="submit"] {
     margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
 }
 
+#produto-titulo{
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Cor do título (azul) */
+  margin-bottom: 10px;
+  text-align: center; /* Centraliza o texto horizontalmente */
+  margin: 0 auto; /* Centraliza o elemento na horizontal usando margens automáticas */
+}
+
 /* Estiliza a imagem do produto */
 .product-image img {
     max-width: 90%;

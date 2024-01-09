@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     async function fetchCodproFromAPI(numsep) {
-        const response = await fetch('http://localhost:3333/codbar', {
+        const response = await fetch('http://127.0.0.1:3333/codbar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function fetchProductByCodpro(codpro) {
-        const response = await fetch('http://localhost:3333/produto', {
+        const response = await fetch('http://127.0.0.1:3333/produto', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
