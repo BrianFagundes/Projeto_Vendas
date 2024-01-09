@@ -242,7 +242,7 @@ function displaySuggestedProducts(suggestedProducts) {
         infoContainer.classList.add('suggested-product-info');
 
         const productCode = document.createElement('p');
-        const productCodeText = product.Produto.substring(1, 7); // Obtém os primeiros 8 caracteres do código do produto
+        const productCodeText = product.Produto.substring(0, 7); // Obtém os primeiros 8 caracteres do código do produto
         productCode.textContent = `${productCodeText}`;
         productCode.classList.add('suggested-product-code'); // Adiciona uma classe para estilização
         infoContainer.appendChild(productCode);

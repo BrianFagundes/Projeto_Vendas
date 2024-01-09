@@ -94,7 +94,7 @@ const verifyProducts = async (codpro, numsep) => {
               WHEN moevs='AU' then REPLACE(ROUND(pvens*678,0),'.',',')
               WHEN moevs<>'AU' then REPLACE(ROUND(pvens,0),'.',',')
     END AS PRECO,
-    CONCAT('http://127.0.0.1/ProjetoHTML/Fotos/',REPLACE(cpros,' ',''),'.jpg') as Foto
+    CONCAT('https://basel.com.br/img/fotos/',REPLACE(cpros,' ',''),'.jpg') as Foto
     from sljpro where cpros=@codpro
     `);
 
@@ -177,32 +177,30 @@ const prodSugeridos = async (codpro) => {
     request.input('codpro', sql.VarChar, codpro);
 
     const result = await request.query(`
-    select reffs from sljpro where cpros= @codpro
-
+      SELECT reffs
+      FROM sljpro
+      WHERE cpros = @codpro
     `);
 
     if (result.recordset && result.recordset.length > 0) {
-      const modifiedResults = result.recordset.map((record) => {
-        if (record.usu_profor && record.usu_profor.length > 2) {
-          record.usu_profor = record.usu_profor.substring(2, 8);
-        }
-        return record;
-      });
+      const reffsValue = result.recordset[0].reffs;
+      const extractedSubstring = reffsValue.substring(2, 8); // Ignora os 2 primeiros caracteres
 
-      // Obtendo o resultado manipulado para a próxima consulta
-      const resultadoManipulado = modifiedResults.map((record) => record.usu_profor);
-
-      // Consulta usando o resultado manipulado para coletar o campo 'codpro'
-      const likeQuery = `select cpros from sljpro where reffs like @resultado`;
+      const likeQuery = `
+        SELECT cpros
+        FROM sljpro
+        WHERE reffs LIKE @resultado
+      `;
+      
       const likeRequest = pool.request();
-      likeRequest.input('resultado', sql.VarChar, `%${resultadoManipulado}%`);
+      likeRequest.input('resultado', sql.VarChar, `%${extractedSubstring}%`);
       const likeResult = await likeRequest.query(likeQuery);
 
       if (likeResult.recordset && likeResult.recordset.length > 0) {
         const productsInfo = [];
 
         for (const item of likeResult.recordset) {
-          const productInfo = await verifyProducts(item.codpro); // Substitua 'numsep' pelo valor apropriado
+          const productInfo = await verifyProducts(item.cpros); // Chama verifyProducts passando apenas o codpro
 
           if (productInfo) {
             productsInfo.push(productInfo);
@@ -217,15 +215,14 @@ const prodSugeridos = async (codpro) => {
       } else {
         return null;
       }
+    } else {
+      return null;
     }
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
-
-
-
 
 module.exports = {
   getAll,
