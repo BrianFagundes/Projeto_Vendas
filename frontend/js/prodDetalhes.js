@@ -247,11 +247,11 @@ function displaySuggestedProducts(suggestedProducts) {
         productCode.classList.add('suggested-product-code'); // Adiciona uma classe para estilização
         infoContainer.appendChild(productCode);
 
-        const productName = document.createElement('p');
-        const productNameText = product.Produto.substring(11); // Obtém o nome do produto a partir do 8º caractere
-        productName.textContent = `${productNameText}`;
-        productName.classList.add('suggested-product-name'); // Adiciona uma classe para estilização
-        infoContainer.appendChild(productName);
+        const produtoTitulo = document.createElement('p');
+        const produtoTituloTexto = product.Titulo;
+        produtoTitulo.textContent = `${produtoTituloTexto}`;
+        produtoTitulo.classList.add('suggested-product-name');
+        infoContainer.appendChild(produtoTitulo);
 
         const productPrice = document.createElement('p');
         const formattedPrice = parseFloat(product.PRECO).toFixed(2);
